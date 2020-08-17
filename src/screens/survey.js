@@ -670,9 +670,7 @@ export const Survey = ({ history }) => {
             <TextAnswer
               id="q16"
               question="16.	Ý kiến khác về mục tiêu đào tạo bậc cử nhân"
-              maximumLength={15}
-              minimumLength={1}
-              required={true}
+              maximumLength={128}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -681,9 +679,7 @@ export const Survey = ({ history }) => {
             <TextAnswer
               id="q17"
               question="17.	Ý kiến khác về mục tiêu đào tạo bậc kỹ sư"
-              maximumLength={15}
-              minimumLength={1}
-              required={true}
+              maximumLength={128}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1557,7 +1553,7 @@ export const Survey = ({ history }) => {
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
             ></GradeAnswer2>
-            <div style={{display: fieldValues['q32']===1 ? 'none' : 'block'}}>
+            <div style={{display: fieldValues['qq4']===1 ? 'none' : 'block'}}>
             <div>Các hình thức quý ông bà có thể hỗ trợ:</div>
             <CheckAnswer
               id="qq5"
