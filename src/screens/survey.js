@@ -495,7 +495,7 @@ export const Survey = ({ history }) => {
               ref={qroleRef}
               question="Vai trò tham gia khảo sát"
               required={true}
-              choices={["Doanh nghiệp", "Giảng viên", "Cựu sinh viên"]}
+              choices={["Doanh nghiệp", "Giảng viên", "Cựu sinh viên, Sinh viên"]}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></DropdownAnswer>
