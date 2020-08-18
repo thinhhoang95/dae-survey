@@ -20,6 +20,7 @@ function App() {
         <Switch>
           <Route path="/thanks" component={Thanks}></Route>
           <Route path="/:id" component={Survey}></Route>
+          <Route path="/" component={Survey}></Route>
         </Switch>
       </BrowserRouter>
     </div>

@@ -24,6 +24,7 @@ export const Survey = ({ history }) => {
     qaddress: false,
     qposition: false,
     qbankaccount: true,
+    qrole: false,
     qbank: true,
     qbranch: true,
     qarea1: true,
@@ -46,7 +47,7 @@ export const Survey = ({ history }) => {
     q12: false,
     q13: false,
     q14: false,
-    q15: false, 
+    q15: false,
     q16: true,
     q17: true,
     q18: false,
@@ -156,6 +157,7 @@ export const Survey = ({ history }) => {
     qposition: "",
     qbankaccount: "",
     qbank: "",
+    qrole: "",
     qbranch: "",
     qarea1: false,
     qarea2: false,
@@ -177,7 +179,7 @@ export const Survey = ({ history }) => {
     q12: 0,
     q13: 0,
     q14: 0,
-    q15: 0, 
+    q15: 0,
     q16: "",
     q17: "",
     q18: 0,
@@ -306,6 +308,7 @@ export const Survey = ({ history }) => {
   const qworkplaceRef = useRef();
   const qaddressRef = useRef();
   const qpositionRef = useRef();
+  const qroleRef = useRef();
 
   const loadDataFromServer = async () => {
     let resp = await fetch("http://localhost:1995/contact/" + id, {
@@ -339,6 +342,7 @@ export const Survey = ({ history }) => {
   };
 
   useEffect(() => {
+    document.title = 'Phiếu khảo sát chương trình đào tạo KTHK'
     if (id) loadDataFromServer();
   }, []);
 
@@ -391,6 +395,10 @@ export const Survey = ({ history }) => {
                 <></>
               )}
             </div>
+            <div>
+              Kính gởi quý vị đại diện doanh nghiệp, giảng viên, cựu sinh viên
+              và sinh viên.
+            </div>
             <div style={{ marginTop: "30px" }}>
               Để đáp ứng yêu cầu hội nhập quốc tế và nhu cầu nhân lực đa dạng
               của xã hội trong các lĩnh vực nghề nghiệp liên quan, Chương Trình
@@ -400,14 +408,33 @@ export const Survey = ({ history }) => {
               vào Khung trình độ quốc gia Việt Nam (Quyết định số 1982/QĐ-TTg
               năm 2016) và Quy định chi tiết và hướng dân thi hành một số điều
               của Luật sửa đổi của Luật giáo dục đại học (Nghị định số
-              99/2019/NĐ-CP ngày 30/12/2019 của Thủ tướng chính phủ). Ý kiến
-              đóng góp của các bên liên quan bao gồm doanh nghiệp, cựu sinh,
-              sinh viên đang học tại trường và giảng viên là thực tiễn khách
-              quan và là cơ sở vững chắc để đơn vị đào tạo có những thay đổi phù
-              hợp về mục tiêu đào tạo, chương trình đào tạo, và phương pháp
-              giảng dạy. Bộ môn Kỹ thuật Hàng không trân trọng mọi ý kiến đóng
-              góp của Quí Ông/Bà để điều chỉnh và hoàn thiện chất lượng đào tạo
-              ngành Kỹ Thuật Hàng không.
+              99/2019/NĐ-CP ngày 30/12/2019 của Thủ tướng chính phủ).
+            </div>
+            <div>
+              Ý kiến đóng góp của các bên liên quan bao gồm doanh nghiệp, giảng
+              viên, cựu sinh viên, sinh viên đang học tại trường và giảng viên
+              là thực tiễn khách quan và là cơ sở vững chắc để đơn vị đào tạo có
+              những thay đổi phù hợp về mục tiêu đào tạo, chương trình đào tạo,
+              và phương pháp giảng dạy. Bộ môn Kỹ thuật Hàng không trân trọng
+              mọi ý kiến đóng góp của Quí Ông/Bà để điều chỉnh và hoàn thiện
+              chương trình đào tạo ngành Kỹ Thuật Hàng không bậc cử nhân và bậc
+              kỹ sư.
+            </div>
+            <div>
+              Quí Ông/Bà vui lòng nhận xét (với các mức độ 1-Không có ý kiến;
+              2-Không cần thiết (hay Rất không đồng ý); 3-Không cần thiết (hay
+              Không đồng ý); 4-Cần thiết (hay Đồng ý); 5- Rất cần thiết (hay Rất
+              đồng ý)) và góp ý cho các nội dung dưới đây:
+              <ul>
+                <li> 1. Mục tiêu đào tạo </li>
+                <li> 2. Năng lực mong đợi của SV khi tốt nghiệp </li>
+                <li> 3. Cấu trúc chương trình đào tạo </li>
+                <li> 4. Phương thức giảng dạy </li>
+              </ul>
+            </div>
+            <div>
+              Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng
+              hành và giúp đỡ quí giá từ Quí Ông/Bà.
             </div>
             <div style={{ marginTop: "30px" }}>
               Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng
@@ -426,7 +453,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <div style={{ marginTop: "45px" }}></div>
-            <h3>Thông tin cá nhân</h3>
+            <h3 style={{ color: "blue" }}>Thông tin cá nhân</h3>
             <TextAnswer
               ref={qnameRef}
               id="qname"
@@ -441,13 +468,21 @@ export const Survey = ({ history }) => {
               ref={qemailRef}
               id="qemail"
               question="2. Email"
-              description="Nếu bạn đang trả lời với tư cách đại diện doanh nghiệp, vui lòng sử dụng email công ty"
+              description="Nếu ông bà đang trả lời với tư cách đại diện doanh nghiệp, vui lòng sử dụng email công ty"
               maximumLength={128}
               minimumLength={1}
               required={true}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
+            <DropdownAnswer
+              id="qrole"
+              question="Vai trò tham gia khảo sát"
+              required={true}
+              choices={["Doanh nghiệp", "Giảng viên", "Cựu sinh viên"]}
+              onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              showError={errorMode}
+            ></DropdownAnswer>
             <TextAnswer
               ref={qworkplaceRef}
               id="qworkplace"
@@ -471,13 +506,14 @@ export const Survey = ({ history }) => {
             <TextAnswer
               ref={qpositionRef}
               id="qposition"
-              question="5. Vị trí"
+              question="5. Vị trí công tác"
               maximumLength={128}
               minimumLength={1}
               required={true}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
+            {/* Vai trò: DN, GV, CSV, SV */}
             <div style={{ fontWeight: "bold" }}>
               6. Hoạt động nghề nghiệp liên quan đến lĩnh vực Kỹ thuật Hàng
               không và các lĩnh vực liên quan:
@@ -548,8 +584,10 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Mục tiêu đào tạo
+            <h3
+              style={{ marginTop: "30px", marginBottom: "30px", color: "blue" }}
+            >
+              A. Mục tiêu đào tạo
             </h3>
             <div>
               Chương trình đào tạo ngành Kỹ thuật Hàng không nhằm mục tiêu đào
@@ -560,6 +598,7 @@ export const Survey = ({ history }) => {
               nguồn nhân lực trong lĩnh vực Kỹ thuật Hàng không – không gian và
               các ngành công nghiệp liên quan.
             </div>
+            {/* Tô đỏ các sự khác biệt */}
             <div style={{ fontWeight: "bold" }}>
               Chương trình đào tạo Kỹ sư (5 năm) được xây dựng với mục tiêu đào
               tạo nâng cao so với bậc Cử nhân (4 năm) với khối lượng kiến thức
@@ -573,8 +612,8 @@ export const Survey = ({ history }) => {
           </Col>
           <Col>
             <h4>
-              Kỹ sư ngành Kỹ thuật Hàng không (4 năm bậc Cử nhân + 1 năm chuyên
-              môn đặc thù bậc kỹ sư)
+              Chương trình Kỹ sư ngành Kỹ thuật Hàng không (4 năm bậc Cử nhân +
+              1 năm chuyên môn đặc thù bậc kỹ sư)
             </h4>
           </Col>
         </Row>
@@ -582,7 +621,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q7"
-              question="7.	Có khả năng giải quyết các vấn đề kỹ thuật trong trong lĩnh vực Kỹ thuật Hàng không; cũng như trong các lĩnh vực kỹ thuật khác có liên quan gần đến lĩnh vực Hàng không, bằng sự vận dụng kiến thức, và các kỹ năng được tích lũy trong quá trình đào tạo ở bậc cử nhân chuyên ngành Kỹ thuật Hàng không."
+              question="7.	Có khả năng giải quyết các vấn đề kỹ thuật trong trong lĩnh vực Kỹ thuật Hàng không; cũng như trong các lĩnh vực kỹ thuật khác có liên quan gần đến lĩnh vực Hàng không, $bằng sự vận dụng kiến thức, và các kỹ năng được tích lũy trong quá trình đào tạo ở bậc cử nhân$ chuyên ngành Kỹ thuật Hàng không."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -591,7 +630,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q8"
-              question="8.	Có khả năng giải quyết các vấn đề kỹ thuật trong trong lĩnh vực Kỹ thuật Hàng không; cũng như trong các lĩnh vực kỹ thuật khác có liên quan gần đến lĩnh vực Hàng không bằng sự vận dụng kiến thức chuyên môn sâu, và các kỹ năng chuyên môn vững chắc được tích lũy trong quá trình đào tạo ở bậc kỹ sư chuyên ngành Kỹ thuật Hàng không – Không gian."
+              question="8.	Có khả năng giải quyết các vấn đề kỹ thuật trong trong lĩnh vực Kỹ thuật Hàng không; cũng như trong các lĩnh vực kỹ thuật khác có liên quan gần đến lĩnh vực Hàng không bằng sự vận dụng $kiến thức chuyên môn sâu, và các kỹ năng chuyên môn vững chắc$ được tích lũy trong quá trình đào tạo ở bậc kỹ sư chuyên ngành Kỹ thuật Hàng không – Không gian."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -609,7 +648,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q10"
-              question="10.	Có khả năng tư duy, kỹ năng cá nhân, nghề nghiệp, giao tiếp, làm việc nhóm, đạo đức nghề nghiệp đủ để làm việc trong môi trường đa ngành, đa văn hóa."
+              question="10.	Có khả năng $tư duy, kỹ năng cá nhân, nghề nghiệp, giao tiếp, làm việc nhóm, đạo đức nghề nghiệp$ đủ để làm việc trong môi trường đa ngành, đa văn hóa."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -618,7 +657,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q11"
-              question="11.	Có khả năng tư duy hệ thống, kỹ năng, thái độ chuyên nghiệp và kinh nghiệm làm việc nhóm để hoạt động trong các nhóm đa ngành, đa văn hóa."
+              question="11.	Có khả năng $tư duy hệ thống, kỹ năng, thái độ chuyên nghiệp và kinh nghiệm làm việc nhóm$ để hoạt động trong các nhóm đa ngành, đa văn hóa."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -629,7 +668,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q12"
-              question="12.	Có hiểu biết về kinh tế, chính trị. Có kiến thức cơ bản trong lĩnh vực khoa học xã hội và nhân văn phù hợp với ngành Kỹ thuật Hàng không để đóng góp hữu hiệu vào sự phát triển bền vững của xã hội, cộng đồng."
+              question="12.	Có hiểu biết về kinh tế, chính trị. $Có kiến thức cơ bản$ trong lĩnh vực khoa học xã hội và nhân văn phù hợp với ngành Kỹ thuật Hàng không để đóng góp hữu hiệu vào sự phát triển bền vững của xã hội, cộng đồng."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -638,7 +677,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q13"
-              question="13.	Có hiểu biết vững chắc về kinh tế, chính trị. Có khả năng sáng tạo trong bối cảnh doanh nghiệp và xã hội, cũng như trong bối cảnh doanh nghiệp và kinh doanh phù hợp với ngành Kỹ thuật Hàng không để đóng góp hữu hiệu vào sự phát triển bền vững của xã hội, cộng đồng."
+              question="13.	Có hiểu biết vững chắc về kinh tế, chính trị. $Có khả năng sáng tạo$ trong bối cảnh doanh nghiệp và xã hội, cũng như trong bối cảnh doanh nghiệp và kinh doanh phù hợp với ngành Kỹ thuật Hàng không để đóng góp hữu hiệu vào sự phát triển bền vững của xã hội, cộng đồng."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -658,7 +697,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q15"
-              question="15.	Có định hướng nghề nghiệp tích cực cho bản thân với sự hoạch định nghề nghiệp tương lai để trở thành kỹ sư, chuyên gia kỹ thuật, nhà quản lý…, cũng như việc học tập tiếp sau khi tốt nghiệp để trở thành giảng viên đại học, nhà nghiên cứu…"
+              question="15.	Có định hướng nghề nghiệp tích cực cho bản thân với sự hoạch định nghề nghiệp tương lai để trở thành $kỹ sư, chuyên gia kỹ thuật, nhà quản lý…$, cũng như việc học tập tiếp sau khi tốt nghiệp để trở thành giảng viên đại học, nhà nghiên cứu…"
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -687,15 +726,17 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Năng lực mong đợi của cử nhân, kỹ sư ngành Kỹ Thuật Hàng Không khi
-              tốt nghiệp
+            <h3
+              style={{ marginTop: "30px", marginBottom: "30px", color: "blue" }}
+            >
+              B. Năng lực mong đợi của cử nhân, kỹ sư ngành Kỹ Thuật Hàng Không
+              khi tốt nghiệp
             </h3>
           </Col>
         </Row>
         <Row>
           <Col>
-            <h4>Năng lực chuyên môn cơ bản</h4>
+            <h4 style={{ color: "blue" }}>C1. Năng lực chuyên môn cơ bản</h4>
             <GradeAnswer
               id="q18"
               question="18.	Có hiểu biết và vận dụng kiến thức khoa học cơ bản (toán, vật lý, hóa đại cương, xác suất – thống kê, phương pháp tính) và kiến thức kỹ thuật cơ sở ngành (cơ học, điện-điện tử, công nghệ thông tin). "
@@ -749,7 +790,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Năng lực chuyên môn nâng cao</h4>
+            <h4 style={{ color: "blue" }}>C2. Năng lực chuyên môn nâng cao</h4>
           </Col>
         </Row>
         <Row>
@@ -909,8 +950,11 @@ export const Survey = ({ history }) => {
           <Col>
             <div style={{ fontWeight: "bold" }}>
               27. Khả năng thiết kế và vận hành các thử nghiệm, cũng như khả
-              năng phân tích và đánh giá dữ liệu, rút ra nhận xét và đề xuất cải
-              thiện.
+              năng phân tích và đánh giá dữ liệu,{" "}
+              <span style={{ color: "blue" }}>
+                rút ra nhận xét và đề xuất cải thiện
+              </span>
+              .
             </div>
             <GradeAnswer
               id="q27a"
@@ -941,7 +985,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q29"
-              question="29.	Khả năng nhận biết và áp dụng kiến thức để đưa ra các giải pháp kỹ thuật cho các vấn đề liên ngành trong một bối cảnh toàn cầu, kinh tế, môi trường và xã hội."
+              question="29.	Khả năng nhận biết và áp dụng kiến thức để đưa ra các giải pháp kỹ thuật cho các vấn đề $liên ngành$ trong một bối cảnh toàn cầu, kinh tế, môi trường và xã hội."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -1120,20 +1164,25 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Cấu trúc chương trình đào tạo
+            <h3
+              style={{ marginTop: "30px", marginBottom: "30px", color: "blue" }}
+            >
+              D. Cấu trúc chương trình đào tạo
             </h3>
             <div style={{ textAlign: "center" }}>
               <img
                 src={require("../img/ctdt.png")}
                 alt="Chương trình đào tạo"
               ></img>
+              {/* Xoá số tín chỉ phần trăm, lấy bảng của cô */}
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức khoa học cơ bản</h4>
+            <h4 style={{ color: "blue" }}>
+              D1. Khối kiến thức khoa học cơ bản
+            </h4>
           </Col>
         </Row>
         <Row>
@@ -1147,7 +1196,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q39b"
-              question="Ý kiến khác về khối kiến thức khoa học cơ bản (CN)"
+              question="Ý kiến khác về khối kiến thức khoa học cơ bản (cử nhân)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1163,7 +1212,7 @@ export const Survey = ({ history }) => {
 
             <TextAnswer
               id="q40b"
-              question="Ý kiến khác về khối kiến thức khoa học cơ bản (KS)"
+              question="Ý kiến khác về khối kiến thức khoa học cơ bản (Kỹ sư)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1171,7 +1220,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức giáo dục chung</h4>
+            <h4 style={{ color: "blue" }}>D2. Khối kiến thức giáo dục chung</h4>
           </Col>
         </Row>
         <Row>
@@ -1199,13 +1248,13 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q45b"
-              question="Ý kiến khác về khối kiến thức giáo dục chung (CN)"
+              question="Ý kiến khác về khối kiến thức giáo dục chung (cử nhân)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
           </Col>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q42"
               question="42.	Nhóm môn học chính trị - xã hội – luật có vai trò quan trọng đối với sự hình thành đạo đức, ý thức và trách nhiệm của một công dân."
               required={true}
@@ -1235,7 +1284,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q47b"
-              question="Ý kiến khác về khối kiến thức giáo dục chung (KS)"
+              question="Ý kiến khác về khối kiến thức giáo dục chung (Kỹ sư)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1243,12 +1292,12 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức cơ sở ngành</h4>
+            <h4 style={{ color: "blue" }}>D3. Khối kiến thức cơ sở ngành</h4>
           </Col>
         </Row>
         <Row>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q48"
               question="48.	Các môn học sau đây là những môn học cơ sở và tối thiểu đối với khối kiến thức cơ sở ngành: (1) Vẽ kỹ thuật; (2) Cơ kỹ thuật và dao động; (3) Cơ học vật rắn và biến dạng, (4) Cơ học thủy khí; (5) Nhiệt động lực học và truyền nhiệt; (6) Kỹ thuật điện - điện tử; (7) Nhập môn lập trình; "
               required={true}
@@ -1257,13 +1306,13 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q48b"
-              question="Ý kiến khác về khối kiến thức cơ sở ngành (CN)"
+              question="Ý kiến khác về khối kiến thức cơ sở ngành (cử nhân)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
           </Col>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q49"
               question="49.	Các môn học sau đây là những môn học cơ sở và tối thiểu đối với khối kiến thức cơ sở:  (1) Cơ học vật rắn và sóng cơ; (2) Điện – điện động học; (3) Vẽ kỹ thuật; (4) Cơ học đại cương và mội trường liên tục; (5) Cơ học thủy khí; (6) Nhiệt động lực học và truyền nhiệt."
               required={true}
@@ -1280,12 +1329,12 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức chuyên ngành</h4>
+            <h4 style={{color: 'blue'}}>Khối kiến thức chuyên ngành</h4>
           </Col>
         </Row>
         <Row>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q50"
               question="50.	Các môn học sau đây là những môn học trong chuyên ngành kỹ thuật hàng không: (1) Khí động lực học 1 (dòng  chuyển động không nén được, vận tốc thấp); (2) Khí động lực học 2 (dòng  chuyển động nén được, vận tốc cao); (3) Cơ học vật liệu Hàng không; (4) Kết cấu hàng không 2 – Phân tích kết cấu máy bay;  (5) Cơ học bay; (6)  Ổn định và điều khiển bay; (7) Hệ thống lực đẩy máy bay 1; (8) Hệ thống lực đẩy máy bay 2."
               required={true}
@@ -1294,13 +1343,13 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q50b"
-              question="Ý kiến khác về khối kiến thức chuyên ngành (CN)"
+              question="Ý kiến khác về khối kiến thức chuyên ngành (cử nhân)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
           </Col>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q51"
               question="51.	Các môn học sau đây là những môn học trong chuyên ngành kỹ thuật hàng không: (1) Khí động lực học 1 (dòng  chuyển động không nén được, vận tốc thấp); (2) Khí động lực học 2 (dòng  chuyển động nén được, vận tốc cao); (3) Cơ học vật liệu Hàng không; (4) Kết cấu hàng không 2 – Phân tích kết cấu máy bay;  (5) Cơ học bay; (6)  Ổn định và điều khiển bay; (7) Hệ thống lực đẩy máy bay 1; (8) Hệ thống lực đẩy máy bay 2."
               required={true}
@@ -1309,7 +1358,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q51b"
-              question="Ý kiến khác về khối kiến thức chuyên ngành (KS)"
+              question="Ý kiến khác về khối kiến thức chuyên ngành (Kỹ sư)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1317,12 +1366,12 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Nhóm môn thí nghiệm, thực hành, thực tập và đồ án</h4>
+            <h4 style={{color: 'blue'}}>Nhóm môn thí nghiệm, thực hành, thực tập và đồ án</h4>
           </Col>
         </Row>
         <Row>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q52"
               question="52.	CTĐT cần có ít nhất 9% (tương ứng 11 tín chỉ) thời lượng học tập cơ sở ngành, chuyên ngành thông qua thí nghiệm, thực hành, thực tập và đồ án."
               required={true}
@@ -1339,7 +1388,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q53"
               question="53.	CTĐT cần có ít nhất 19% (tương ứng 11 tín chỉ) thời lượng học tập cơ sở ngành, chuyên ngành ngành thông qua thí nghiệm, thực hành, thực tập và đồ án."
               required={true}
@@ -1356,14 +1405,14 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức tự chọn tự do</h4>
+            <h4 style={{color: 'blue'}}>D4. Khối kiến thức tự chọn tự do</h4>
           </Col>
         </Row>
         <Row>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q54"
-              question="54.	CTĐT cần có tối đa 7% thời lượng học tập (tương ứng 9 tín chỉ) cho các môn học tự chọn tự do khai phóng năng lực cá nhân trong chương trình đào tạo toàn trường hoặc trong hệ thống Đại học Quốc gia TP. HCM. Sinh viên tự chọn môn học theo sở thích và nhu cầu trang bị kiến thức cá nhân, chuẩn bị cho nghề nghiệp tương lai."
+              question="54.	CTĐT cần có tối đa $7%$ thời lượng học tập (tương ứng 9 tín chỉ) cho các môn học tự chọn tự do khai phóng năng lực cá nhân trong chương trình đào tạo toàn trường hoặc trong hệ thống Đại học Quốc gia TP. HCM. Sinh viên tự chọn môn học theo sở thích và nhu cầu trang bị kiến thức cá nhân, chuẩn bị cho nghề nghiệp tương lai."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -1376,9 +1425,9 @@ export const Survey = ({ history }) => {
             ></TextAnswer>
           </Col>
           <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q55"
-              question="55.	CTĐT cần có tối đa 6% thời lượng học tập (tương ứng 9 tín chỉ) cho các môn học tự chọn tự do khai phóng năng lực cá nhân trong chương trình đào tạo toàn trường hoặc trong hệ thống Đại học Quốc gia TP. HCM. Sinh viên tự chọn môn học theo sở thích và nhu cầu trang bị kiến thức cá nhân, chuẩn bị cho nghề nghiệp tương lai."
+              question="55.	CTĐT cần có tối đa $6%$ thời lượng học tập (tương ứng 9 tín chỉ) cho các môn học tự chọn tự do khai phóng năng lực cá nhân trong chương trình đào tạo toàn trường hoặc trong hệ thống Đại học Quốc gia TP. HCM. Sinh viên tự chọn môn học theo sở thích và nhu cầu trang bị kiến thức cá nhân, chuẩn bị cho nghề nghiệp tương lai."
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -1393,15 +1442,13 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức đặc thù của chương trình Kỹ sư</h4>
+            <h4 style={{color: 'blue'}}>D5. Khối kiến thức đặc thù của chương trình Kỹ sư</h4>
           </Col>
         </Row>
         <Row>
+          <Col></Col>
           <Col>
-
-          </Col>
-          <Col>
-          <GradeAnswer
+            <GradeAnswer
               id="q56"
               question="56.	Khối kiến thức đặc thù bậc kỹ sư  được giảng dạy theo phương  thức thực hiện dự án (PBL –Project Based Learning. Sinh viên tìm hiểu và thực hiện đồ án giải quyết vấn đề quan tâm nghiên cứu và phát triển (R&D) của doanh nghiệp. Việc hướng dẫn và đánh giá môn học có sự tham gia của doanh nghiệp xuyên suốt môn học."
               required={true}
@@ -1415,6 +1462,7 @@ export const Survey = ({ history }) => {
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
             ></GradeAnswer>
+            {/* Tô màu sự khác biệt */}
             <GradeAnswer
               id="q58"
               question="58.	Sinh viên chọn một trong hai hướng chuyên môn nhằm trang bị các phương pháp, công cụ thiết kế đặc thù bậc kỹ sư,  chuyên ngành kỹ thuật hàng không, được tổ chức trong các môn học tự chọn dưới hình thức thực hiện dự án (PBL), bao gồm: Tương tác lưu chất và kết cấu, Thiết kế hệ thống và điều khiển"
@@ -1452,17 +1500,17 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-          <TextAnswer
+            <TextAnswer
               id="q60c"
-              question="Ý kiến về nhóm môn học/môn học cần bổ sung bậc CN"
+              question="Ý kiến về nhóm môn học/môn học cần bổ sung bậc cử nhân"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
           </Col>
           <Col>
-          <TextAnswer
+            <TextAnswer
               id="q60d"
-              question="Ý kiến về nhóm môn học/môn học cần bổ sung bậc KS"
+              question="Ý kiến về nhóm môn học/môn học cần bổ sung bậc kỹ sư"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1470,22 +1518,44 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3>Phương thức giảng dạy</h3>
+            <h3 style={{color: 'blue'}}>Phương thức giảng dạy</h3>
             <div>
-              Phương thức giảng dạy cổ điển: • Nội dung chương trình đào tạo
-              (môn học) cố định theo chuyên ngành; • Giáo viên thuyết giảng trực
-              tiếp; • SV được đánh giá trong suốt quá trình học tập của môn học
-              bằng các hình thức bài tập tại lớp, bài tập về nhà, bài tập lớn,
-              kiểm tra giữa kì và thi cuối kì.
+              {/* Tách dòng */}
+              Phương thức giảng dạy cổ điển:
+              <ul>
+                <li>
+                  Nội dung chương trình đào tạo (môn học) cố định theo chuyên
+                  ngành;
+                </li>
+                <li>Giáo viên thuyết giảng trực tiếp;</li>
+                <li>
+                  SV được đánh giá trong suốt quá trình học tập của môn học bằng
+                  các hình thức bài tập tại lớp, bài tập về nhà, bài tập lớn,
+                  kiểm tra giữa kì và thi cuối kì.
+                </li>
+              </ul>
             </div>
             <div>
-              Phương thức giảng dạy theo hình thức thực hiện dự án: • Sau khi
-              kết thúc giai đoạn đại cương (02 năm đầu) thì SV học tập thông qua
-              việc thực hiện các đề tài chuyên ngành; • SV chỉ chọn học các môn
-              cơ sở ngành và chuyên ngành kỹ thuật cần thiết và phù hợp với nội
-              dung đề tài thực hiện; • SV chỉ tích lũy kiến thức và rèn luyện
-              những kỹ năng chuyên môn cần thiết và phù hợp với nội dung đề tài
-              thực hiện, thay vì học đầy đủ các nội dung từ cơ bản đến nâng cao.
+              Phương thức giảng dạy theo hình thức thực hiện dự án:
+              <ul>
+                <li>
+                  Sau khi kết thúc giai đoạn đại cương (02 năm đầu) thì SV học
+                  tập thông qua việc thực hiện các đề tài chuyên ngành;
+                </li>
+                <li>
+                  Sau khi kết thúc giai đoạn đại cương (02 năm đầu) thì SV học
+                  tập thông qua việc thực hiện các đề tài chuyên ngành;
+                </li>
+                <li>
+                  SV chỉ chọn học các môn cơ sở ngành và chuyên ngành kỹ thuật
+                  cần thiết và phù hợp với nội dung đề tài thực hiện;
+                </li>
+                <li>
+                  SV chỉ tích lũy kiến thức và rèn luyện những kỹ năng chuyên
+                  môn cần thiết và phù hợp với nội dung đề tài thực hiện, thay
+                  vì học đầy đủ các nội dung từ cơ bản đến nâng cao.
+                </li>
+              </ul>
             </div>
           </Col>
         </Row>
@@ -1508,7 +1578,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="qq3"
-              question="Ý kiến về phương thức giảng dạy CN"
+              question="Ý kiến về phương thức giảng dạy cử nhân"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1531,7 +1601,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="qq3b"
-              question="Ý kiến về phương thức giảng dạy KS"
+              question="Ý kiến về phương thức giảng dạy kỹ sư"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1540,7 +1610,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <div style={{ marginTop: "45px" }}></div>
-            <h3>Giúp đỡ đơn vị đào tạo</h3>
+            <h3 style={{color: 'blue'}}>Giúp đỡ đơn vị đào tạo</h3>
             <div style={{ marginTop: "45px" }}></div>
           </Col>
         </Row>
@@ -1553,57 +1623,59 @@ export const Survey = ({ history }) => {
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
             ></GradeAnswer2>
-            <div style={{display: fieldValues['qq4']===1 ? 'none' : 'block'}}>
-            <div>Các hình thức quý ông bà có thể hỗ trợ:</div>
-            <CheckAnswer
-              id="qq5"
-              question="Tham gia giảng dạy toàn bộ môn học hay theo chuyên đề."
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq6"
-              question="Tư vấn kỹ thuật – công nghệ"
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq7"
-              question="Cập nhật tài liệu, thông tin kỹ thuật – công nghệ chuyên ngành"
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq8"
-              question="Tham gia tổ chức các buổi seminar giới thiệu về nghề nghiệp, thông tin kỹ thuật – công nghệ chuyên ngành."
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq9"
-              question="Tài trợ sử dụng các thiết bị hoặc phần mềm chuyên dùng."
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq10"
-              question="Đặt hàng đề tài thực hiện."
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <CheckAnswer
-              id="qq11"
-              question="Tài trợ kinh phí thực hiện đề tài."
-              showError={errorMode}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-            ></CheckAnswer>
-            <TextAnswer
-              id="qq12"
-              question="Ý kiến khác về khả năng trợ giúp của quý Ông/Bà"
-              maximumLength={1200}
-              onChangeAndValidate={(val) => onChangeAndValidate(val)}
-              showError={errorMode}
-            ></TextAnswer>
+            <div
+              style={{ display: fieldValues["qq4"] === 1 ? "none" : "block" }}
+            >
+              <div>Các hình thức quý ông bà có thể hỗ trợ:</div>
+              <CheckAnswer
+                id="qq5"
+                question="Tham gia giảng dạy toàn bộ môn học hay theo chuyên đề."
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq6"
+                question="Tư vấn kỹ thuật – công nghệ"
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq7"
+                question="Cập nhật tài liệu, thông tin kỹ thuật – công nghệ chuyên ngành"
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq8"
+                question="Tham gia tổ chức các buổi seminar giới thiệu về nghề nghiệp, thông tin kỹ thuật – công nghệ chuyên ngành."
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq9"
+                question="Tài trợ sử dụng các thiết bị hoặc phần mềm chuyên dùng."
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq10"
+                question="Đặt hàng đề tài thực hiện."
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <CheckAnswer
+                id="qq11"
+                question="Tài trợ kinh phí thực hiện đề tài."
+                showError={errorMode}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+              ></CheckAnswer>
+              <TextAnswer
+                id="qq12"
+                question="Ý kiến khác về khả năng trợ giúp của quý Ông/Bà"
+                maximumLength={1200}
+                onChangeAndValidate={(val) => onChangeAndValidate(val)}
+                showError={errorMode}
+              ></TextAnswer>
             </div>
           </Col>
         </Row>
@@ -1637,6 +1709,7 @@ export const Survey = ({ history }) => {
                 </Button>
               </Modal.Footer>
             </Modal>
+            <div style={{marginBottom: '60px'}}></div>
           </Col>
         </Row>
       </Container>

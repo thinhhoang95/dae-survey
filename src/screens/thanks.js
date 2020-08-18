@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 export const Thanks = () => {
+
+  useEffect(() => {
+    document.title = 'Xin cảm ơn!'
+  }, [])
+
   return (
     <div className="App">
       <Container>
         <Row>
           <Col>
+            <div style={{marginTop: '60px'}}></div>
             <h1>Xin cảm ơn</h1>
             <div>
               Xin trân trọng cảm ơn quý Ông/Bà đã dành thời gian quý báu của
