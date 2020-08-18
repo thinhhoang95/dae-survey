@@ -298,7 +298,7 @@ export const Survey = ({ history }) => {
         setErrorMode(true);
         return;
       }
-    } 
+    }
     // Form is ready for submission, DO SUBMISSION HERE
 
     handleShow();
@@ -385,11 +385,11 @@ export const Survey = ({ history }) => {
       }
     } catch (error) {
       setLoading(false);
-        alert(
-          "Đã có lỗi xảy ra trong quá trình gửi dữ liệu đi. Chúng tôi thành thật xin lỗi vì sự bất tiện này."
-        );
-        console.log('Error in transmission: ', error);
-        setShow(false);
+      alert(
+        "Đã có lỗi xảy ra trong quá trình gửi dữ liệu đi. Chúng tôi thành thật xin lỗi vì sự bất tiện này."
+      );
+      console.log("Error in transmission: ", error);
+      setShow(false);
     }
   };
 
@@ -495,7 +495,11 @@ export const Survey = ({ history }) => {
               ref={qroleRef}
               question="Vai trò tham gia khảo sát"
               required={true}
-              choices={["Doanh nghiệp", "Giảng viên", "Cựu sinh viên, Sinh viên"]}
+              choices={[
+                "Doanh nghiệp",
+                "Giảng viên",
+                "Cựu sinh viên", "Sinh viên",
+              ]}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></DropdownAnswer>
@@ -869,7 +873,9 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>C3. Năng lực giải quyết các vấn đề kỹ thuật</h4>
+            <h4 style={{ color: "blue" }}>
+              C3. Năng lực giải quyết các vấn đề kỹ thuật
+            </h4>
           </Col>
         </Row>
         <Row>
@@ -1010,7 +1016,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>C4. Kỹ năng mềm và thái độ</h4>
+            <h4 style={{ color: "blue" }}>C4. Kỹ năng mềm và thái độ</h4>
           </Col>
         </Row>
         <Row>
