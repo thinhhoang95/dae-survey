@@ -291,14 +291,14 @@ export const Survey = ({ history }) => {
   };
 
   const validateFormAndSubmit = async () => {
-    /* console.log("Field valid: ", fieldValid);
+    console.log("Field valid: ", fieldValid);
     for (let i = 0; i < Object.keys(fieldValid).length; i++) {
       if (fieldValid[Object.keys(fieldValid)[i]] === false) {
         // Contains an invalid field
         setErrorMode(true);
         return;
       }
-    } */
+    } 
     // Form is ready for submission, DO SUBMISSION HERE
 
     handleShow();
