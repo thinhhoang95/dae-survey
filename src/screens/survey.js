@@ -1171,7 +1171,7 @@ export const Survey = ({ history }) => {
             </h3>
             <div style={{ textAlign: "center" }}>
               <img
-                src={require("../img/ctdt.png")}
+                src={require("../img/ctdt.png")} 
                 alt="Chương trình đào tạo"
               ></img>
               {/* Xoá số tín chỉ phần trăm, lấy bảng của cô */}
