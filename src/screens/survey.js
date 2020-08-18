@@ -869,7 +869,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>Năng lực giải quyết các vấn đề kỹ thuật</h4>
+            <h4 style={{color: 'blue'}}>C3. Năng lực giải quyết các vấn đề kỹ thuật</h4>
           </Col>
         </Row>
         <Row>
@@ -1010,7 +1010,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>Kỹ năng mềm và thái độ</h4>
+            <h4 style={{color: 'blue'}}>C4. Kỹ năng mềm và thái độ</h4>
           </Col>
         </Row>
         <Row>
@@ -1345,7 +1345,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{ color: "blue" }}>Khối kiến thức chuyên ngành</h4>
+            <h4 style={{ color: "blue" }}>D4. Khối kiến thức chuyên ngành</h4>
           </Col>
         </Row>
         <Row>
@@ -1383,7 +1383,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <h4 style={{ color: "blue" }}>
-              Nhóm môn thí nghiệm, thực hành, thực tập và đồ án
+              D5. Nhóm môn thí nghiệm, thực hành, thực tập và đồ án
             </h4>
           </Col>
         </Row>
@@ -1423,7 +1423,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{ color: "blue" }}>D4. Khối kiến thức tự chọn tự do</h4>
+            <h4 style={{ color: "blue" }}>D6. Khối kiến thức tự chọn tự do</h4>
           </Col>
         </Row>
         <Row>
@@ -1461,7 +1461,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <h4 style={{ color: "blue" }}>
-              D5. Khối kiến thức đặc thù của chương trình Kỹ sư
+              D7. Khối kiến thức đặc thù của chương trình Kỹ sư
             </h4>
           </Col>
         </Row>
