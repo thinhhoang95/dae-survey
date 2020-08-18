@@ -391,6 +391,9 @@ export const Survey = ({ history }) => {
                 <></>
               )}
             </div>
+            <div>
+              Kính gởi quý vị đại diện doanh nghiệp, giảng viên, cựu sinh viên và sinh viên.
+            </div>
             <div style={{ marginTop: "30px" }}>
               Để đáp ứng yêu cầu hội nhập quốc tế và nhu cầu nhân lực đa dạng
               của xã hội trong các lĩnh vực nghề nghiệp liên quan, Chương Trình
@@ -400,14 +403,36 @@ export const Survey = ({ history }) => {
               vào Khung trình độ quốc gia Việt Nam (Quyết định số 1982/QĐ-TTg
               năm 2016) và Quy định chi tiết và hướng dân thi hành một số điều
               của Luật sửa đổi của Luật giáo dục đại học (Nghị định số
-              99/2019/NĐ-CP ngày 30/12/2019 của Thủ tướng chính phủ). Ý kiến
-              đóng góp của các bên liên quan bao gồm doanh nghiệp, cựu sinh,
+              99/2019/NĐ-CP ngày 30/12/2019 của Thủ tướng chính phủ).
+            </div>
+            <div>
+               Ý kiến đóng góp của các bên liên quan bao gồm doanh nghiệp, giảng viên, cựu sinh viên,
               sinh viên đang học tại trường và giảng viên là thực tiễn khách
               quan và là cơ sở vững chắc để đơn vị đào tạo có những thay đổi phù
               hợp về mục tiêu đào tạo, chương trình đào tạo, và phương pháp
               giảng dạy. Bộ môn Kỹ thuật Hàng không trân trọng mọi ý kiến đóng
-              góp của Quí Ông/Bà để điều chỉnh và hoàn thiện chất lượng đào tạo
-              ngành Kỹ Thuật Hàng không.
+              góp của Quí Ông/Bà để điều chỉnh và hoàn thiện chương trình đào tạo
+              ngành Kỹ Thuật Hàng không bậc cử nhân và bậc kỹ sư.
+            </div>
+            <div>
+            Quí Ông/Bà vui lòng nhận xét (với các mức độ 1-Không có ý kiến; 2-Không cần thiết
+(hay Rất không đồng ý); 3-Không cần thiết (hay Không đồng ý); 4-Cần thiết (hay Đồng ý); 5-
+Rất cần thiết (hay Rất đồng ý)) và góp ý cho các nội dung dưới đây:
+
+            <ul>
+
+            <li> 1. Mục tiêu đào tạo </li>
+            <li> 2. Năng lực mong đợi của SV khi tốt nghiệp </li>
+            <li> 3. Cấu trúc chương trình đào tạo </li>
+            <li> 4. Phương thức giảng dạy </li>
+
+            </ul>
+
+            </div>
+            <div>
+
+Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng hành và giúp đỡ
+quí giá từ Quí Ông/Bà.
             </div>
             <div style={{ marginTop: "30px" }}>
               Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng
@@ -441,7 +466,7 @@ export const Survey = ({ history }) => {
               ref={qemailRef}
               id="qemail"
               question="2. Email"
-              description="Nếu bạn đang trả lời với tư cách đại diện doanh nghiệp, vui lòng sử dụng email công ty"
+              description="Nếu ông bà đang trả lời với tư cách đại diện doanh nghiệp, vui lòng sử dụng email công ty"
               maximumLength={128}
               minimumLength={1}
               required={true}
@@ -471,13 +496,14 @@ export const Survey = ({ history }) => {
             <TextAnswer
               ref={qpositionRef}
               id="qposition"
-              question="5. Vị trí"
+              question="5. Vị trí công tác"
               maximumLength={128}
               minimumLength={1}
               required={true}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
+            {/* Vai trò: DN, GV, CSV, SV */}
             <div style={{ fontWeight: "bold" }}>
               6. Hoạt động nghề nghiệp liên quan đến lĩnh vực Kỹ thuật Hàng
               không và các lĩnh vực liên quan:
@@ -548,8 +574,8 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Mục tiêu đào tạo
+            <h3 style={{ marginTop: "30px", marginBottom: "30px", color: "blue" }}>
+              A. Mục tiêu đào tạo
             </h3>
             <div>
               Chương trình đào tạo ngành Kỹ thuật Hàng không nhằm mục tiêu đào
@@ -560,6 +586,7 @@ export const Survey = ({ history }) => {
               nguồn nhân lực trong lĩnh vực Kỹ thuật Hàng không – không gian và
               các ngành công nghiệp liên quan.
             </div>
+            {/* Tô đỏ các sự khác biệt */}
             <div style={{ fontWeight: "bold" }}>
               Chương trình đào tạo Kỹ sư (5 năm) được xây dựng với mục tiêu đào
               tạo nâng cao so với bậc Cử nhân (4 năm) với khối lượng kiến thức
@@ -573,7 +600,7 @@ export const Survey = ({ history }) => {
           </Col>
           <Col>
             <h4>
-              Kỹ sư ngành Kỹ thuật Hàng không (4 năm bậc Cử nhân + 1 năm chuyên
+              Chương trình Kỹ sư ngành Kỹ thuật Hàng không (4 năm bậc Cử nhân + 1 năm chuyên
               môn đặc thù bậc kỹ sư)
             </h4>
           </Col>
@@ -687,15 +714,15 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Năng lực mong đợi của cử nhân, kỹ sư ngành Kỹ Thuật Hàng Không khi
+            <h3 style={{ marginTop: "30px", marginBottom: "30px", color: "blue" }}>
+              B. Năng lực mong đợi của cử nhân, kỹ sư ngành Kỹ Thuật Hàng Không khi
               tốt nghiệp
             </h3>
           </Col>
         </Row>
         <Row>
           <Col>
-            <h4>Năng lực chuyên môn cơ bản</h4>
+            <h4 style={{color: "blue"}}>C1. Năng lực chuyên môn cơ bản</h4>
             <GradeAnswer
               id="q18"
               question="18.	Có hiểu biết và vận dụng kiến thức khoa học cơ bản (toán, vật lý, hóa đại cương, xác suất – thống kê, phương pháp tính) và kiến thức kỹ thuật cơ sở ngành (cơ học, điện-điện tử, công nghệ thông tin). "
@@ -749,7 +776,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Năng lực chuyên môn nâng cao</h4>
+            <h4 style={{color: "blue"}}>C2. Năng lực chuyên môn nâng cao</h4>
           </Col>
         </Row>
         <Row>
@@ -1121,19 +1148,20 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <h3 style={{ marginTop: "30px", marginBottom: "30px" }}>
-              Cấu trúc chương trình đào tạo
+              D. Cấu trúc chương trình đào tạo 
             </h3>
             <div style={{ textAlign: "center" }}>
               <img
-                src={require("../img/ctdt.png")}
+                src={require("../img/ctdt.png")} 
                 alt="Chương trình đào tạo"
               ></img>
+              {/* Xoá số tín chỉ phần trăm, lấy bảng của cô */}
             </div>
           </Col>
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức khoa học cơ bản</h4>
+            <h4>D1. Khối kiến thức khoa học cơ bản</h4>
           </Col>
         </Row>
         <Row>
@@ -1147,7 +1175,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q39b"
-              question="Ý kiến khác về khối kiến thức khoa học cơ bản (CN)"
+              question="Ý kiến khác về khối kiến thức khoa học cơ bản (cử nhân)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1171,7 +1199,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức giáo dục chung</h4>
+            <h4>D2. Khối kiến thức giáo dục chung</h4>
           </Col>
         </Row>
         <Row>
@@ -1199,7 +1227,7 @@ export const Survey = ({ history }) => {
             ></GradeAnswer>
             <TextAnswer
               id="q45b"
-              question="Ý kiến khác về khối kiến thức giáo dục chung (CN)"
+              question="Ý kiến khác về khối kiến thức giáo dục chung (KS)"
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
               showError={errorMode}
             ></TextAnswer>
@@ -1243,7 +1271,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức cơ sở ngành</h4>
+            <h4>D3. Khối kiến thức cơ sở ngành</h4>
           </Col>
         </Row>
         <Row>
@@ -1356,7 +1384,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức tự chọn tự do</h4>
+            <h4>D4. Khối kiến thức tự chọn tự do</h4>
           </Col>
         </Row>
         <Row>
@@ -1393,7 +1421,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Khối kiến thức đặc thù của chương trình Kỹ sư</h4>
+            <h4>D5. Khối kiến thức đặc thù của chương trình Kỹ sư</h4>
           </Col>
         </Row>
         <Row>
@@ -1415,6 +1443,7 @@ export const Survey = ({ history }) => {
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
             ></GradeAnswer>
+            {/* Tô màu sự khác biệt */}
             <GradeAnswer
               id="q58"
               question="58.	Sinh viên chọn một trong hai hướng chuyên môn nhằm trang bị các phương pháp, công cụ thiết kế đặc thù bậc kỹ sư,  chuyên ngành kỹ thuật hàng không, được tổ chức trong các môn học tự chọn dưới hình thức thực hiện dự án (PBL), bao gồm: Tương tác lưu chất và kết cấu, Thiết kế hệ thống và điều khiển"
@@ -1472,6 +1501,7 @@ export const Survey = ({ history }) => {
           <Col>
             <h3>Phương thức giảng dạy</h3>
             <div>
+              {/* Tách dòng */}
               Phương thức giảng dạy cổ điển: • Nội dung chương trình đào tạo
               (môn học) cố định theo chuyên ngành; • Giáo viên thuyết giảng trực
               tiếp; • SV được đánh giá trong suốt quá trình học tập của môn học
