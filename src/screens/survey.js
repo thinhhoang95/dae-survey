@@ -25,6 +25,7 @@ export const Survey = ({ history }) => {
     qposition: false,
     qbankaccount: true,
     qrole: false,
+    qworkplace: true,
     qbank: true,
     qbranch: true,
     qarea1: true,
@@ -326,6 +327,8 @@ export const Survey = ({ history }) => {
       await setFieldValid({ ...fieldValid, qemail: true });
       await setFieldValues({ ...fieldValues, qemail: data.email });
       qworkplaceRef.current.setInitValue(data.workplace);
+      await setFieldValid({ ...fieldValid, qworkplace: true });
+      qroleRef.current.setInitValue(data.role);
       await setFieldValid({ ...fieldValid, qrole: true });
       await setFieldValues({ ...fieldValues, qrole: data.role });
       qaddressRef.current.setInitValue(data.address);
@@ -1087,7 +1090,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q33a"
-              question="33a.	Trình độ tiếng Anh tối thiểu tương đương TOEIC 550"
+              question="33a.	Trình độ tiếng Anh tối thiểu tương đương $TOEIC 550$"
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
@@ -1102,7 +1105,7 @@ export const Survey = ({ history }) => {
           <Col>
             <GradeAnswer
               id="q34a"
-              question="34a.	Trình độ tiếng Anh tối thiểu tương đương TOEIC 600"
+              question="34a.	Trình độ tiếng Anh tối thiểu tương đương $TOEIC 600$"
               required={true}
               showError={errorMode}
               onChangeAndValidate={(val) => onChangeAndValidate(val)}
