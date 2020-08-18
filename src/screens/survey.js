@@ -1538,7 +1538,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{ color: "blue" }}>Phương thức giảng dạy</h3>
+            <h3 style={{ color: "blue" }}>E. Phương thức giảng dạy</h3>
             <div>
               {/* Tách dòng */}
               Phương thức giảng dạy cổ điển:
@@ -1630,7 +1630,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <div style={{ marginTop: "45px" }}></div>
-            <h3 style={{ color: "blue" }}>Giúp đỡ đơn vị đào tạo</h3>
+            <h3 style={{ color: "blue" }}>F. Khả năng hỗ trợ đơn vị đào tạo</h3>
             <div style={{ marginTop: "45px" }}></div>
           </Col>
         </Row>
