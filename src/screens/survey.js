@@ -283,6 +283,7 @@ export const Survey = ({ history }) => {
     qq12: false,
   });
   const [errorMode, setErrorMode] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onChangeAndValidate = async (value) => {
     await setFieldValid({ ...fieldValid, [value.id]: value.valid });
@@ -290,14 +291,14 @@ export const Survey = ({ history }) => {
   };
 
   const validateFormAndSubmit = async () => {
-    console.log("Field valid: ", fieldValid);
+    /* console.log("Field valid: ", fieldValid);
     for (let i = 0; i < Object.keys(fieldValid).length; i++) {
       if (fieldValid[Object.keys(fieldValid)[i]] === false) {
         // Contains an invalid field
         setErrorMode(true);
         return;
       }
-    }
+    } */
     // Form is ready for submission, DO SUBMISSION HERE
 
     handleShow();
@@ -312,7 +313,7 @@ export const Survey = ({ history }) => {
   const qroleRef = useRef();
 
   const loadDataFromServer = async () => {
-    let resp = await fetch("http://localhost:1995/contact/" + id, {
+    let resp = await fetch("http://dae.dte.hcmut.edu.vn:1995/contact/" + id, {
       method: "GET",
       mode: "cors",
     });
@@ -345,7 +346,7 @@ export const Survey = ({ history }) => {
   };
 
   useEffect(() => {
-    document.title = 'Phiếu khảo sát chương trình đào tạo KTHK'
+    document.title = "Phiếu khảo sát chương trình đào tạo KTHK";
     if (id) loadDataFromServer();
   }, []);
 
@@ -355,25 +356,40 @@ export const Survey = ({ history }) => {
     Object.keys(fieldValues).forEach((item) => {
       data.append(item, fieldValues[item]);
     });
-    const rawResponse = await fetch("http://localhost:1995/survey/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: data.toString(),
-    });
-    if (rawResponse.status === 200) {
-      alert(
-        "Dữ liệu đã được gửi đi thành công. Xin chân thành cảm ơn thời gian quý báu của quý anh chị đã dành cho khảo sát."
+    setLoading(true);
+    try {
+      const rawResponse = await fetch(
+        "http://dae.dte.hcmut.edu.vn:1995/survey/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data.toString(),
+        }
       );
-      history.push("/thanks");
-      setShow(false);
-    } else {
-      alert(
-        "Đã có lỗi xảy ra trong quá trình gửi dữ liệu đi. Chúng tôi thành thật xin lỗi vì sự bất tiện này."
-      );
-      console.log(await rawResponse.text());
-      setShow(false);
+      if (rawResponse.status === 200) {
+        alert(
+          "Dữ liệu đã được gửi đi thành công. Xin chân thành cảm ơn thời gian quý báu của quý anh chị đã dành cho khảo sát."
+        );
+        setLoading(false);
+        history.push("/thanks");
+        setShow(false);
+      } else {
+        setLoading(false);
+        alert(
+          "Đã có lỗi xảy ra trong quá trình gửi dữ liệu đi. Chúng tôi thành thật xin lỗi vì sự bất tiện này."
+        );
+        console.log(await rawResponse.text());
+        setShow(false);
+      }
+    } catch (error) {
+      setLoading(false);
+        alert(
+          "Đã có lỗi xảy ra trong quá trình gửi dữ liệu đi. Chúng tôi thành thật xin lỗi vì sự bất tiện này."
+        );
+        console.log('Error in transmission: ', error);
+        setShow(false);
     }
   };
 
@@ -435,10 +451,6 @@ export const Survey = ({ history }) => {
                 <li> 4. Phương thức giảng dạy </li>
               </ul>
             </div>
-            <div>
-              Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng
-              hành và giúp đỡ quí giá từ Quí Ông/Bà.
-            </div>
             <div style={{ marginTop: "30px" }}>
               Bộ môn Kỹ thuật Hàng không trân trọng cảm ơn sự tin tưởng, sự đồng
               hành và giúp đỡ quí giá từ Quí Ông/Bà. <br />
@@ -480,6 +492,7 @@ export const Survey = ({ history }) => {
             ></TextAnswer>
             <DropdownAnswer
               id="qrole"
+              ref={qroleRef}
               question="Vai trò tham gia khảo sát"
               required={true}
               choices={["Doanh nghiệp", "Giảng viên", "Cựu sinh viên"]}
@@ -1174,7 +1187,7 @@ export const Survey = ({ history }) => {
             </h3>
             <div style={{ textAlign: "center" }}>
               <img
-                src={require("../img/ctdt.png")} 
+                src={require("../img/ctdt.png")}
                 alt="Chương trình đào tạo"
               ></img>
               {/* Xoá số tín chỉ phần trăm, lấy bảng của cô */}
@@ -1332,7 +1345,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>Khối kiến thức chuyên ngành</h4>
+            <h4 style={{ color: "blue" }}>Khối kiến thức chuyên ngành</h4>
           </Col>
         </Row>
         <Row>
@@ -1369,7 +1382,9 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>Nhóm môn thí nghiệm, thực hành, thực tập và đồ án</h4>
+            <h4 style={{ color: "blue" }}>
+              Nhóm môn thí nghiệm, thực hành, thực tập và đồ án
+            </h4>
           </Col>
         </Row>
         <Row>
@@ -1408,7 +1423,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>D4. Khối kiến thức tự chọn tự do</h4>
+            <h4 style={{ color: "blue" }}>D4. Khối kiến thức tự chọn tự do</h4>
           </Col>
         </Row>
         <Row>
@@ -1445,7 +1460,9 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4 style={{color: 'blue'}}>D5. Khối kiến thức đặc thù của chương trình Kỹ sư</h4>
+            <h4 style={{ color: "blue" }}>
+              D5. Khối kiến thức đặc thù của chương trình Kỹ sư
+            </h4>
           </Col>
         </Row>
         <Row>
@@ -1521,7 +1538,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h3 style={{color: 'blue'}}>Phương thức giảng dạy</h3>
+            <h3 style={{ color: "blue" }}>Phương thức giảng dạy</h3>
             <div>
               {/* Tách dòng */}
               Phương thức giảng dạy cổ điển:
@@ -1613,7 +1630,7 @@ export const Survey = ({ history }) => {
         <Row>
           <Col>
             <div style={{ marginTop: "45px" }}></div>
-            <h3 style={{color: 'blue'}}>Giúp đỡ đơn vị đào tạo</h3>
+            <h3 style={{ color: "blue" }}>Giúp đỡ đơn vị đào tạo</h3>
             <div style={{ marginTop: "45px" }}></div>
           </Col>
         </Row>
@@ -1707,12 +1724,16 @@ export const Survey = ({ history }) => {
                 <Button variant="secondary" onClick={() => handleClose()}>
                   Không đồng ý
                 </Button>
-                <Button variant="primary" onClick={() => submitForm()}>
+                <Button
+                  variant="primary"
+                  disabled={loading ? true : false}
+                  onClick={() => submitForm()}
+                >
                   Đồng ý
                 </Button>
               </Modal.Footer>
             </Modal>
-            <div style={{marginBottom: '60px'}}></div>
+            <div style={{ marginBottom: "60px" }}></div>
           </Col>
         </Row>
       </Container>
