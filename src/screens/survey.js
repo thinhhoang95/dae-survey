@@ -869,7 +869,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Năng lực giải quyết các vấn đề kỹ thuật</h4>
+            <h4 style={{color: 'blue'}}>Năng lực giải quyết các vấn đề kỹ thuật</h4>
           </Col>
         </Row>
         <Row>
@@ -1010,7 +1010,7 @@ export const Survey = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <h4>Kỹ năng mềm và thái độ</h4>
+            <h4 style={{color: 'blue'}}>Kỹ năng mềm và thái độ</h4>
           </Col>
         </Row>
         <Row>
